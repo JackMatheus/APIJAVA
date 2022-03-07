@@ -18,7 +18,7 @@ import com.dio.livecoding.crud.salasdereuniao.model.TarefaModel;
 import com.dio.livecoding.crud.salasdereuniao.repository.TarefaRepository;
 
 @RestController @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class TarefaController {
 	@Autowired
 	private TarefaRepository repository;	
@@ -28,16 +28,23 @@ public class TarefaController {
 	    return repository.findAll();	  
 	  }
 
-
-	@PostMapping(path = "/api/tarefa/salvar")
+	@PostMapping(path = "/tarefa")
 	public TarefaModel salvar(@RequestBody TarefaModel tarefa) {
 		return repository.save(tarefa);
 	}
 	
+	@GetMapping(path = "/tarefa/{codigo}")
+	public Optional<TarefaModel> consultarPeloCodigoId(@PathVariable Integer codigo) {
+		return repository.findById(codigo);
+	}
+	
+	//ate aqui ok	
+	@DeleteMapping(path = "tarefa/deletar")
+	public TarefaModel deletar(@PathVariable Integer codigo) {
+		return null;
+	}
 
-	
-	
-	
-	
+
+
 
 }

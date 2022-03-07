@@ -2,8 +2,6 @@ package com.dio.livecoding.crud.salasdereuniao.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +18,10 @@ public class UsuarioModel {
 	@Column(nullable = false, length = 50)
 	public String nome;
 	
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 50)
 	public String email;
 	
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 50)
 	public String senha;
 	
 	public Integer getCodigo() {
