@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dio.livecoding.crud.salasdereuniao.model.Room;
 import com.dio.livecoding.crud.salasdereuniao.model.TarefaModel;
 import com.dio.livecoding.crud.salasdereuniao.model.UsuarioModel;
 import com.dio.livecoding.crud.salasdereuniao.repository.UsuarioRepository;
@@ -39,15 +40,15 @@ public class UsuarioController {
         return repository.save(usuario);
     }
     
-    //ate aqui ok	
     @GetMapping(path = "/usuario/{codigo}")
     public Optional<UsuarioModel> consultarPeloCodigoId(@PathVariable Integer codigo) {
  		return repository.findById(codigo);
- }    
+ 	
+    }    
 	
 	@DeleteMapping(path = "usuario/deletar/{codigo}")
-	public UsuarioModel deletar(@PathVariable Integer codigo) {
-		return null;
+	public void deletar(@PathVariable Integer codigo) {
+		repository.deleteById(codigo);
 	}
 
     

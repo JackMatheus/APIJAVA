@@ -38,10 +38,10 @@ public class TarefaController {
 		return repository.findById(codigo);
 	}
 	
-	//ate aqui ok	
-	@DeleteMapping(path = "tarefa/deletar")
-	public TarefaModel deletar(@PathVariable Integer codigo) {
-		return null;
+	
+	@DeleteMapping(path = "tarefa/deletar/{codigo}")
+	public void deletar(@PathVariable Integer codigo) {
+		repository.deleteById(codigo);
 	}
 
 
