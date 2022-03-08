@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dio.livecoding.crud.salasdereuniao.exception.ResourceNotFoundException;
 import com.dio.livecoding.crud.salasdereuniao.model.Room;
 import com.dio.livecoding.crud.salasdereuniao.model.TarefaModel;
 import com.dio.livecoding.crud.salasdereuniao.model.UsuarioModel;
@@ -49,6 +51,19 @@ public class UsuarioController {
 	@DeleteMapping(path = "usuario/deletar/{codigo}")
 	public void deletar(@PathVariable Integer codigo) {
 		repository.deleteById(codigo);
+	}
+	
+	@PutMapping(path = "/usuario/{codigo}")
+	public ResponseEntity<UsuarioModel> atualizarPeloCodigoId(@PathVariable (value = "id") Integer codigo,
+								@Valid @RequestBody UsuarioModel usuarioDetails) throws ResourceNotFoundException {
+	UsuarioModel usuario = repository.findById(codigo)
+	 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found for this id :: " + codigo));
+
+	usuario.setNome(usuarioDetails.getNome());
+	usuario.setEmail(usuarioDetails.getEmail());
+	final UsuarioModel updateUsuario = repository.save(usuario);
+	return ResponseEntity.ok(updateUsuario);
+
 	}
 
     
